@@ -6,7 +6,7 @@ var ProductCategoryRow = React.createClass({
 
 var ProductRow = React.createClass({
   render: function() {
-    var name = this.props.product.stocked ?
+    var name = this.props.product.basic ?
       this.props.product.name :
       <span style={{color: 'red'}}>
         {this.props.product.name}
@@ -19,24 +19,23 @@ var ProductRow = React.createClass({
 
 var ProductTable = React.createClass({
   render: function() {
-    var rows = [];
+    var settingToShow = [];
     var lastCategory = null;
     this.props.products.forEach(function(product) {
       //this filters 'product' aka 'settings'
-      if (!product.stocked && this.props.inStockOnly) {
+      if (product.basic && this.props.basicOnly) {
         return;
       }
-      //this makes new categories, can delete after testing
       if (product.category !== lastCategory) {
-        rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
+        settingToShow.push(<ProductCategoryRow category={product.category} key={product.category} />);
       }
-      rows.push(<ProductRow product={product} key={product.name} />);
+      settingToShow.push(<ProductRow product={product} key={product.name} />);
       lastCategory = product.category;
     }.bind(this));
     return (
       <div>
       <ul>
-        {rows}
+        {settingToShow}
       </ul>
       </div>
     );
@@ -46,7 +45,7 @@ var ProductTable = React.createClass({
 var SearchBar = React.createClass({
   handleChange: function() {
     this.props.onUserInput(
-      this.refs.inStockOnlyInput.checked
+      this.refs.basicOnlyInput.checked
     );
   },
   render: function() {
@@ -54,13 +53,13 @@ var SearchBar = React.createClass({
       <form>
         <p>
           <input
-            type="checkbox"
-            checked={this.props.inStockOnly}
-            ref="inStockOnlyInput"
+            type="radio"
+            checked={this.props.basicOnly}
+            ref="basicOnlyInput"
             onChange={this.handleChange}
           />
           {' '}
-          Only show products in stock
+          Only basic setting
         </p>
       </form>
     );
@@ -70,13 +69,13 @@ var SearchBar = React.createClass({
 var FilterableProductTable = React.createClass({
   getInitialState: function() {
     return {
-      inStockOnly: true
+      basicOnly: true
     };
   },
 
-  handleUserInput: function(inStockOnly) {
+  handleUserInput: function(basicOnly) {
     this.setState({
-      inStockOnly: inStockOnly
+      basicOnly: basicOnly
     });
   },
 
@@ -84,12 +83,12 @@ var FilterableProductTable = React.createClass({
     return (
       <div>
         <SearchBar
-          inStockOnly={this.state.inStockOnly}
+          basicOnly={this.state.basicOnly}
           onUserInput={this.handleUserInput}
         />
         <ProductTable
           products={this.props.products}
-          inStockOnly={this.state.inStockOnly}
+          basicOnly={this.state.basicOnly}
         />
       </div>
     );
