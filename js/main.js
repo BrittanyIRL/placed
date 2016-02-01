@@ -4,22 +4,90 @@ var PlacedApp = React.createClass({
   render: function() {
     return (
       <div className="row">
-        <PlaceSetting></PlaceSetting>      
+        <PlaceSetting></PlaceSetting> 
+      </div>
+      <div className="row">
+        <Napkin></Napkin>
+        <Fork></Fork>
+        <Plate></Plate>
+        <Knife></Knife>
+        <Spoon></Spoon>    
       </div>
 
     );
   }
 });
 
+
+//various items to show up depending on basic, informal, or formal
+var Napkin = React.createClass({
+  //basic
+  render: function(){
+    return (
+      <div className="col-md-2">
+        <p>Napkin</p>
+      </div>
+    );
+  }
+});
+
+var Fork = React.createClass({
+  //basic
+  render: function(){
+    return (
+      <div className="col-md-2">
+        <p>Fork</p>
+      </div>
+    );
+  }
+});
+
+var Plate = React.createClass({
+  //basic
+  render: function(){
+    return (
+      <div className="col-md-4">
+        <p>Plate</p>
+      </div>
+    );
+  }
+});
+var Knife = React.createClass({
+  //basic
+  render: function(){
+    return (
+      <div className="col-md-2">
+        <p>Knife</p>
+      </div>
+    );
+  }
+});
+
+var Spoon = React.createClass({
+  //basic
+  render: function(){
+    return (
+      <div className="col-md-2">
+        <p>spoon</p>
+      </div>
+    );
+  }
+});
+
+
+//to be the three base options, 
 var PlaceSetting = React.createClass({
+  // basic setting
+
   render: function() {
       return (
         <div>
           <h2>Successfully inside the basic variable </h2>
         </div>
+        
         );
     }
-  });
+});
 
 
 //Radio button if thens 
