@@ -24,6 +24,7 @@ var ProductTable = React.createClass({
     this.props.products.forEach(function(product) {
       //this filters 'product' aka 'settings'
       if (product.basic && this.props.basicOnly) {
+        console.log('click recieved')
         return;
       }
       if (product.category !== lastCategory) {
@@ -53,7 +54,7 @@ var SearchBar = React.createClass({
       <form>
         <p>
           <input
-            type="radio"
+            type="checkbox"
             checked={this.props.basicOnly}
             ref="basicOnlyInput"
             onChange={this.handleChange}
@@ -69,7 +70,7 @@ var SearchBar = React.createClass({
 var FilterableProductTable = React.createClass({
   getInitialState: function() {
     return {
-      basicOnly: true
+      basicOnly: false
     };
   },
 
