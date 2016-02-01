@@ -1,6 +1,6 @@
 var ProductCategoryRow = React.createClass({
   render: function() {
-    return (<tr><th colSpan="2">{this.props.category}</th></tr>);
+    return (<p>{this.props.category}</p>);
   }
 });
 
@@ -12,10 +12,7 @@ var ProductRow = React.createClass({
         {this.props.product.name}
       </span>;
     return (
-      <tr>
-        <td>{name}</td>
-        <td>{this.props.product.price}</td>
-      </tr>
+        <li>{name}</li>
     );
   }
 });
@@ -25,9 +22,11 @@ var ProductTable = React.createClass({
     var rows = [];
     var lastCategory = null;
     this.props.products.forEach(function(product) {
-      if (product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.inStockOnly)) {
+      //this filters 'product' aka 'settings'
+      if (!product.stocked && this.props.inStockOnly) {
         return;
       }
+      //this makes new categories, can delete after testing
       if (product.category !== lastCategory) {
         rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
       }
@@ -35,15 +34,11 @@ var ProductTable = React.createClass({
       lastCategory = product.category;
     }.bind(this));
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+      <div>
+      <ul>
+        {rows}
+      </ul>
+      </div>
     );
   }
 });
@@ -51,14 +46,12 @@ var ProductTable = React.createClass({
 var SearchBar = React.createClass({
   handleChange: function() {
     this.props.onUserInput(
-      this.refs.filterTextInput.value,
       this.refs.inStockOnlyInput.checked
     );
   },
   render: function() {
     return (
       <form>
-        
         <p>
           <input
             type="checkbox"
@@ -77,14 +70,12 @@ var SearchBar = React.createClass({
 var FilterableProductTable = React.createClass({
   getInitialState: function() {
     return {
-      filterText: '',
       inStockOnly: true
     };
   },
 
-  handleUserInput: function(filterText, inStockOnly) {
+  handleUserInput: function(inStockOnly) {
     this.setState({
-      filterText: filterText,
       inStockOnly: inStockOnly
     });
   },
@@ -93,13 +84,11 @@ var FilterableProductTable = React.createClass({
     return (
       <div>
         <SearchBar
-          filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
           onUserInput={this.handleUserInput}
         />
         <ProductTable
           products={this.props.products}
-          filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
         />
       </div>
@@ -116,11 +105,11 @@ var FilterableProductTable = React.createClass({
 // after this works it should be consolidated 
 // so that things are not duplicated
 var PRODUCTS = [
-  {category: 'Basic', name: 'Napkin', stocked: false},
-  {category: 'Basic', name: 'Fork', stocked: false},
-  {category: 'Basic', name: 'Plate', stocked: false},
-  {category: 'Basic', name: 'Knife', stocked: false},
-  {category: 'Basic', name: 'Spoon', stocked: false}
+  {category: 'LC', name: 'Napkin', stocked: false, basic: true},
+  {category: 'LC', name: 'Fork', stocked: false, basic: true},
+  {category: 'CC', name: 'Plate', stocked: false, basic: true},
+  {category: 'RC', name: 'Knife', stocked: false, basic: true},
+  {category: 'RC', name: 'Spoon', stocked: false, basic: true}
   // {category: 'Informal', name: 'Napkin'},
   // {category: 'Informal', name: 'Fork'},
   // {category: 'Informal', name: 'Fork'},
