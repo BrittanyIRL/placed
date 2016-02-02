@@ -24,12 +24,17 @@ var buttons = [
   {value: false, name: "Formal"}
 ];
 
+var addActive = React.createClass({
+  //attach active 'visible' class and transfer down the ladder
+  //base it on button value 
+})
 var RadioButtons = React.createClass({
   getInitialState: function () {
     // Assuming there is always one option set to true.
     return {
       buttons: this.props.options.filter(function (option) {
         return option.value;
+
       })[0].name
     };
   },
