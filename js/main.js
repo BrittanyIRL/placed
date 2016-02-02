@@ -1,105 +1,91 @@
-var ProductCategoryRow = React.createClass({
-  render: function() {
-    return (<p>{this.props.category}</p>);
-  }
-});
+//What you actually see... 
+//*************************
 
-var ProductRow = React.createClass({
-  render: function() {
-    var name = this.props.product.basic ?
-      this.props.product.name :
-      <span style={{color: 'red'}}>
-        {this.props.product.name}
-      </span>;
-    return (
-        <li>{name}</li>
-    );
-  }
-});
-
-var ProductTable = React.createClass({
-  render: function() {
-    var settingToShow = [];
-    var lastCategory = null;
-    this.props.products.forEach(function(product) {
-      //this filters 'product' aka 'settings'
-      if (product.basic && this.props.basicOnly) {
-        console.log('click recieved')
-        return;
-      }
-      if (product.category !== lastCategory) {
-        settingToShow.push(<ProductCategoryRow category={product.category} key={product.category} />);
-      }
-      settingToShow.push(<ProductRow product={product} key={product.name} />);
-      lastCategory = product.category;
-    }.bind(this));
-    return (
+var View = React.createClass({
+  render: function(){
+    //fill this once radio is working
+    return(
       <div>
-      <ul>
-        {settingToShow}
-      </ul>
+
+      <RadioButtons options={buttons}
+        onUserInput={this.handleUserInput}
+        />
+      <Basic />
+      <Informal />
       </div>
     );
   }
-});
+})
 
-var SearchBar = React.createClass({
-  handleChange: function() {
-    this.props.onUserInput(
-      this.refs.basicOnlyInput.checked
-    );
-  },
-  render: function() {
-    return (
-      <form>
-        <p>
-          <input
-            type="checkbox"
-            checked={this.props.basicOnly}
-            ref="basicOnlyInput"
-            onChange={this.handleChange}
-          />
-          {' '}
-          Only basic setting
-        </p>
-      </form>
-    );
-  }
-});
+//RADIO BUTTONS TO SELECT CONTENT 
+var buttons = [
+  {value: true, name: "Basic"},
+   {value: false, name: "Informal"},
+  {value: false, name: "Formal"}
+];
 
-var FilterableProductTable = React.createClass({
-  getInitialState: function() {
+var RadioButtons = React.createClass({
+  getInitialState: function () {
+    // Assuming there is always one option set to true.
     return {
-      basicOnly: false
+      buttons: this.props.options.filter(function (option) {
+        return option.value;
+      })[0].name
     };
   },
-
-  handleUserInput: function(basicOnly) {
+  onRadioChange: function (e) {
     this.setState({
-      basicOnly: basicOnly
+      buttons: e.target.value
     });
   },
-
-  render: function() {
+  render: function () {
+    var options = this.props.options.map(function (option, key) {
+      return (
+        <li key={key}>
+          <input type="radio" 
+             name="question" 
+             onChange={this.onRadioChange} 
+             checked={this.state.buttons === option.name}
+             value={option.name} /> {option.name}
+        </li>
+      );
+    }, this);
     return (
-      <div>
-        <SearchBar
-          basicOnly={this.state.basicOnly}
-          onUserInput={this.handleUserInput}
-        />
-        <ProductTable
-          products={this.props.products}
-          basicOnly={this.state.basicOnly}
-        />
+      <div className="row">
+        <div className="col-md-4">
+        <ul style={{listStyle: 'none'}}>
+          {options}
+        </ul>
       </div>
+    </div>
     );
   }
 });
 
+//CONTENTS TO DISPLAY
+// ********************************
+//BASIC
+var Basic = React.createClass({
+  render: function(){
+    //fill this once radio is working
+    return(<p>Basic setting goes here</p>);
+  }
+});
+//INFORMAL
+var Informal = React.createClass({
+  render: function(){
+    //fill this once radio is working
+    return(<p>Informal setting goes here</p>);
+  }
+});
 
-
-
-
+//FORMAL 
+var Formal = React.createClass({
+  render: function(){
+    //fill this once radio is working
+    return(<p>Formal setting goes here</p>);
+  }
+});
 
 // place setting json to pull and filter data from, 
 // after this works it should be consolidated 
@@ -141,4 +127,4 @@ var PRODUCTS = [
 
 
 
-ReactDOM.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById('reactApp'));
+ReactDOM.render(<View />, document.getElementById('reactApp'));
