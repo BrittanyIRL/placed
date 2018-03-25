@@ -4,6 +4,7 @@ import Setting from './Setting/Setting';
 // import classes from './settings.css';
 
 const settings = ( props ) => {
+  console.log("settings component props: ", props);
   let top_sort = props.order.top; //reference only
   let bottom_sort = props.order.bottom; // reference only
   // prepare sort of settings, use this to render contents in the proper order

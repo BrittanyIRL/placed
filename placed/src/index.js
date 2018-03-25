@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 
 // reducers
 import tableSettingReducer from './store/reducers/tableSetting';
-
+import selectedSettingReducer from './store/reducers/selectedSetting';
 // styles
 import './index.css';
 // base component
@@ -23,7 +23,8 @@ import registerServiceWorker from './registerServiceWorker';
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
-  tableSetting: tableSettingReducer
+  tableSetting: tableSettingReducer,
+  selectedSetting: selectedSettingReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
