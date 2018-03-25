@@ -27,8 +27,11 @@ class PlaceSettings extends Component {
   component should update if state or props has been updated.
   **/
   shouldComponentUpdate( nextProps, nextState ){
-    console.log("next props: ", nextProps);
-    if (this.props.setting_order !== nextProps.setting_order){
+    if (this.props.current_error_title !== nextProps.current_error_title){
+      return true;
+    } else if (this.props.settings_error_title !== nextProps.settings_error_title){
+      return true;
+    } else if (this.props.setting_order !== nextProps.setting_order){
       return true;
     } else if (this.props.setting_legend !== nextProps.setting_legend){
       return true;
@@ -44,29 +47,36 @@ class PlaceSettings extends Component {
 
   render() {
     let setting_buttons = null;
-    if (this.props.setting_types) {
-      setting_buttons = this.props.setting_types.map( setting => {
-        console.log("a setting: ", setting);
-        return (
-          <Button
-          key={setting}
-          clicked={() => this.props.fetchSelectedSetting(setting)}
-          btnType="Success">
-          {setting}</Button>
-        )
-      });
+    if (this.props.settings_error) {
+      setting_buttons = (<div>{this.props.settings_error_message}</div>);
+    } else {
+      if (this.props.setting_types) {
+        setting_buttons = this.props.setting_types.map( setting => {
+          return (
+            <Button
+            key={setting}
+            clicked={() => this.props.fetchSelectedSetting(setting)}
+            btnType="Success">
+            {setting}</Button>
+          )
+        });
+      }
     }
 
     let current_setting = 'nothing to display, click an option';
-    if (this.props.current_setting_title) {
-      current_setting = (
-        <Settings
-          items={this.props.current_setting_items}
-          legend={this.props.setting_legend}
-          order={this.props.setting_order}
-          title={this.props.current_setting_title}
-          />
-      )
+    if (this.props.current_error) {
+      current_setting = this.props.current_error_message + this.props.current_error_title;
+    } else {
+      if (this.props.current_setting_title) {
+        current_setting = (
+          <Settings
+            items={this.props.current_setting_items}
+            legend={this.props.setting_legend}
+            order={this.props.setting_order}
+            title={this.props.current_setting_title}
+            />
+        )
+      }
     }
 
     return (
@@ -84,7 +94,13 @@ const mapStateToProps = state => {
     setting_order : state.tableSetting.setting_order,
     setting_types : state.tableSetting.setting_types,
     current_setting_items : state.selectedSetting.current_setting_items,
-    current_setting_title : state.selectedSetting.current_setting_title
+    current_setting_title : state.selectedSetting.current_setting_title,
+    settings_error : state.tableSetting.error,
+    settings_error_message : state.tableSetting.error_message,
+    settings_error_title : state.tableSetting.error_for,
+    current_error : state.selectedSetting.error,
+    current_error_message : state.selectedSetting.error_message,
+    current_error_title : state.selectedSetting.error_for
   }
 }
 
