@@ -1,0 +1,1 @@
+export const SETTING_ORDER = "SETTING_ORDER";
