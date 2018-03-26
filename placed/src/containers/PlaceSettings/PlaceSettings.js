@@ -15,8 +15,9 @@ import styled from 'styled-components'
 import classes from './PlaceSettings.css';
 
 const Main = styled.main`
-  width: 60vw;
+  width: 90vw;
   margin: 0 auto;
+  display: flex;
 `;
 
 
@@ -62,11 +63,12 @@ class PlaceSettings extends Component {
     } else {
       if (this.props.setting_types) {
         setting_buttons = this.props.setting_types.map( setting => {
+          let ButtonClass = this.props.current_setting_title === setting ? 'Active' : 'Basic';
           return (
             <Button
             key={setting}
             clicked={() => this.props.fetchSelectedSetting(setting)}
-            btnType="Success">
+            btnType={ButtonClass}>
             {setting}</Button>
           )
         });

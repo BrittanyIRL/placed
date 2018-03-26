@@ -5,21 +5,18 @@
     outline: none;
     cursor: pointer;
     font: inherit;
-    padding: 10px;
-    margin: 10px;
     font-weight: bold;
+    height: 48px;
 }
 
-.Button:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
+.Basic {
+    color: black;
+}
+.Basic:hover {
+  color: #C65C52;
 }
 
-.Button:disabled {
-    color: #ccc;
-    cursor: not-allowed;
-}
-
-.Success {
-    color: salmon;
+.Active {
+  color: salmon;
+  cursor: default;
 }
