@@ -7,6 +7,7 @@
     font: inherit;
     font-weight: bold;
     height: 48px;
+    text-transform: capitalize;
 }
 
 .Basic {
@@ -15,7 +16,9 @@
 .Basic:hover {
   color: #C65C52;
 }
-
+.Basic:active {
+  color: #793932;
+}
 .Active {
   color: salmon;
   cursor: default;

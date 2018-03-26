@@ -18,7 +18,7 @@ const settings = ( props ) => {
 
   return (
     <div className={classes.ContainerSettings}>
-      <h2>{props.title}</h2>
+      <h2 className={classes.SettingsHeading}>{props.title}</h2>
       <div className={classes.TopSettings}>
         {top_settings.map( item => (
           <Setting

@@ -2,3 +2,10 @@
   list-style-type: none;
   min-width: 3em;
 }
+.NavListItem a {
+  color: black;
+}
+
+.NavListItem a.active {
+    color: salmon;
+}

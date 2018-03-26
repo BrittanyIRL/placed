@@ -22,9 +22,6 @@ const Main = styled.main`
 
 
 class PlaceSettings extends Component {
-  state = {
-    error: false
-  }
   componentDidMount(){
     // get setting legend
     this.props.fetchSettingLegend();
