@@ -1,0 +1,108 @@
+.Setting {
+  width: 3em;
+  height: 6em;
+  margin: 0 auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/*Specific placements */
+/* charger */
+.Setting.item_0 {
+  background-image: url('../../../assets/charger.png');
+}
+/*"butter plate and knife"*/
+.Setting.item_1 {
+  width: 60%;
+  background-image: url('../../../assets/bread_and_butter.png');
+  background-position: left;
+}
+/*"water goblet"*/
+.Setting.item_2 {
+  background-image: url('../../../assets/water.png');
+  width: 8em;
+  background-position: bottom;
+}
+/*red wine*/
+.Setting.item_3 {
+  background-image: url('../../../assets/red_wine.png');
+  width: 8em;
+  background-position: bottom;
+}
+/*"white wine"*/
+.Setting.item_4 {
+  background-image: url('../../../assets/white_wine.png');
+  width: 8em;
+  background-position: bottom;
+}
+/*"sherry or champagne"*/
+.Setting.item_5 {
+  background-image: url('../../../assets/dinner_knife.png');
+  width: 8em;
+  background-position: bottom;
+}
+/*"salad fork"*/
+.Setting.item_6 {
+  background-image: url('../../../assets/salad_fork.png');
+}
+/*"fish fork"*/
+.Setting.item_7 {
+  background-image: url('../../../assets/seafood_fork.png');
+}
+/*"dinner fork"*/
+.Setting.item_8 {
+  background-image: url('../../../assets/dinner_fork.png');
+}
+/*"plate"*/
+.Setting.item_9 {
+  width: 10em;
+  height: 10em;
+  background-image: url('../../../assets/fancy_plate.png');
+  background-position: top;
+}
+/*dinner knife*/
+.Setting.item_10 {
+  background-image: url('../../../assets/dinner_knife.png');
+}
+/*fish knife*/
+.Setting.item_11 {
+  background-image: url('../../../assets/seafood_knife.png');
+}
+/*salad knife*/
+.Setting.item_12 {
+  background-image: url('../../../assets/salad_knife.png');
+}
+/*soup spoon*/
+.Setting.item_13 {
+  background-image: url('../../../assets/soup_spoon.png');
+}
+/*fruit spoon*/
+.Setting.item_14 {
+  background-image: url('../../../assets/fruit_spoon.png');
+}
+/*oyster fork*/
+.Setting.item_15 {
+  background-image: url('../../../assets/oyster_fork.png');
+}
+/*salad plate*/
+.Setting.item_16 {
+  background-image: url('../../../assets/salad_plate.png');
+  width: 4rem;
+}
+/*napkin*/
+.Setting.item_17 {
+  background-image: url('../../../assets/napkin.png');
+}
+/*dessert spoon/fork*/
+.Setting.item_18 {
+  background-image: url('../../../assets/dessert_spoon.png');
+  min-width: 6em;
+  background-position: bottom;
+}
+/*Teacup*/
+.Setting.item_19 {
+  background-image: url('../../../assets/tea.png');
+  width: 8em;
+  background-position: bottom;
+}

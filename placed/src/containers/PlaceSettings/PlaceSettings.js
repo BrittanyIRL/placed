@@ -14,6 +14,12 @@ import Settings from '../../components/Settings/Settings';
 import styled from 'styled-components'
 import classes from './PlaceSettings.css';
 
+const Main = styled.main`
+  width: 60vw;
+  margin: 0 auto;
+`;
+
+
 class PlaceSettings extends Component {
   state = {
     error: false
@@ -67,9 +73,9 @@ class PlaceSettings extends Component {
       }
     }
 
-    let current_setting = 'nothing to display, click an option';
+    let current_setting = (<p className={[classes.Empty]}>Nothing to display, click an option</p>);
     if (this.props.current_error) {
-      current_setting = this.props.current_error_message + this.props.current_error_title;
+      current_setting = (<p className={[classes.Error]}>this.props.current_error_message + this.props.current_error_title</p>);
     } else {
       if (this.props.current_setting_title) {
         current_setting = (
@@ -84,10 +90,10 @@ class PlaceSettings extends Component {
     }
 
     return (
-      <main>
+      <Main>
       <div className={[classes.ButtonContainer]}>{setting_buttons}</div>
       <div className={[classes.DisplaySetting]}>{current_setting}</div>
-      </main>
+      </Main>
     );
   };
 };

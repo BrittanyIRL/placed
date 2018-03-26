@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Setting from './Setting/Setting';
-// import classes from './settings.css';
+import classes from './Settings.css';
 
 const settings = ( props ) => {
   console.log("settings component props: ", props);
@@ -17,10 +17,9 @@ const settings = ( props ) => {
   });
 
   return (
-    <div>
+    <div className={classes.ContainerSettings}>
       <h2>{props.title}</h2>
-      <p>some text</p>
-      <div>
+      <div className={classes.TopSettings}>
         {top_settings.map( item => (
           <Setting
             key={item}
@@ -29,7 +28,7 @@ const settings = ( props ) => {
             />
         ))}
       </div>
-      <div>
+      <div className={classes.BottomSettings}>
         {bottom_settings.map( item => (
           <Setting
             key={item}

@@ -1,0 +1,24 @@
+.ContainerSettings {
+  width: 100%;
+  overflow: scroll;
+  padding: 0 0.5em;
+}
+
+.TopSettings,
+.BottomSettings {
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.BottomSettings {
+  margin-top: 1em;
+  align-content: center;
+}
+
+.TopSettings {
+  align-content: stretch;
+}

@@ -3,10 +3,11 @@
 **/
 import React from 'react';
 
+import classes from './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => (
-    <ul>
+    <ul className={classes.NavList}>
         <NavigationItem link="/" exact>Home</NavigationItem>
     </ul>
 );

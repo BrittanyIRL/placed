@@ -1,7 +1,9 @@
 import React from 'react';
 
+import classes from './Setting.css';
+
 const setting = (props) => (
-  <span key={props.item} id={props.item_id}>{props.title}</span>
+  <span className={[classes.Setting, classes[props.id]].join(' ')} key={props.item} alt-text={props.title}></span>
 );
 
 export default setting;

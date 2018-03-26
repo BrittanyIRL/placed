@@ -1,0 +1,10 @@
+.ToolbarHeader {
+  width: 100%;
+  margin: 0;
+  border-bottom: .15em solid salmon;
+}
+
+.ToolbarNav {
+  display: flex;
+  align-items: flex-end;
+}
