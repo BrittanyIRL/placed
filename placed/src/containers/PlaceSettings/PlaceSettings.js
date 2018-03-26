@@ -10,6 +10,10 @@ import * as actions from '../../store/actions/index';
 import Button from '../../components/UI/Button/Button';
 import Settings from '../../components/Settings/Settings';
 
+// styles
+import styled from 'styled-components'
+import classes from './PlaceSettings.css';
+
 class PlaceSettings extends Component {
   state = {
     error: false
@@ -48,7 +52,7 @@ class PlaceSettings extends Component {
   render() {
     let setting_buttons = null;
     if (this.props.settings_error) {
-      setting_buttons = (<div>{this.props.settings_error_message}</div>);
+      setting_buttons = (<p className={[classes.Error]}>{this.props.settings_error_message}</p>);
     } else {
       if (this.props.setting_types) {
         setting_buttons = this.props.setting_types.map( setting => {
@@ -80,10 +84,10 @@ class PlaceSettings extends Component {
     }
 
     return (
-      <div>
-      {setting_buttons}
-      {current_setting}
-      </div>
+      <main>
+      <div className={[classes.ButtonContainer]}>{setting_buttons}</div>
+      <div className={[classes.DisplaySetting]}>{current_setting}</div>
+      </main>
     );
   };
 };

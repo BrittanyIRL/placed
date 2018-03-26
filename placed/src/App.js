@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 // redux & store dependencies
 import { connect } from 'react-redux';
-// base styles for app
-import './App.css';
+
 
 // import containers for routing and rendering:
 import Layout from './hoc/Layout/Layout';
