@@ -19,6 +19,16 @@
 .Basic:active {
   color: #793932;
 }
+.BasicBackground {
+  background-color: salmon;
+  color: black;
+}
+.BasicBackground:hover {
+  color: #C65C52;
+}
+.BasicBackground:active {
+  color: #793932;
+}
 .Active {
   color: salmon;
   cursor: default;
