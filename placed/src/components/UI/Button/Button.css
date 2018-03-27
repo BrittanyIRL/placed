@@ -4,9 +4,9 @@
     color: white;
     outline: none;
     cursor: pointer;
-    font: inherit;
     font-weight: bold;
     height: 48px;
+    font-size: 1.3rem;
     text-transform: capitalize;
 }
 
@@ -19,6 +19,14 @@
 .Basic:active {
   color: #793932;
 }
+.Basic:disabled {
+  cursor: default;
+  color: gray;
+}
+.Basic:hover:disabled {
+  cursor: default;
+  color: gray;
+}
 .BasicBackground {
   background-color: salmon;
   color: black;
@@ -28,6 +36,15 @@
 }
 .BasicBackground:active {
   color: #793932;
+}
+.BasicBackground:disabled {
+  cursor: default;
+  background-color: gray;
+}
+.BasicBackground:hover:disabled {
+  cursor: default;
+  background-color: gray;
+  color: black;
 }
 .Active {
   color: salmon;

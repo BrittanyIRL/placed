@@ -5,5 +5,6 @@ export {
 } from './tableSetting';
 
 export {
-  fetchSelectedSetting
+  fetchSelectedSetting,
+  fetchCustomSetting
 } from './selectedSetting';

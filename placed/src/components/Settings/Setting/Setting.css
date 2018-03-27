@@ -10,99 +10,99 @@
 /*Specific placements */
 /* charger */
 .Setting.item_0 {
-  background-image: url('../../../assets/charger.png');
+  background-image: url('../../../assets/images/charger.png');
 }
 /*"butter plate and knife"*/
 .Setting.item_1 {
   width: 60%;
-  background-image: url('../../../assets/bread_and_butter.png');
+  background-image: url('../../../assets/images/bread_and_butter.png');
   background-position: left;
 }
 /*"water goblet"*/
 .Setting.item_2 {
-  background-image: url('../../../assets/water.png');
+  background-image: url('../../../assets/images/water.png');
   width: 8em;
   background-position: bottom;
 }
 /*red wine*/
 .Setting.item_3 {
-  background-image: url('../../../assets/red_wine.png');
+  background-image: url('../../../assets/images/red_wine.png');
   width: 8em;
   background-position: bottom;
 }
 /*"white wine"*/
 .Setting.item_4 {
-  background-image: url('../../../assets/white_wine.png');
+  background-image: url('../../../assets/images/white_wine.png');
   width: 8em;
   background-position: bottom;
 }
 /*"sherry or champagne"*/
 .Setting.item_5 {
-  background-image: url('../../../assets/dinner_knife.png');
+  background-image: url('../../../assets/images/dinner_knife.png');
   width: 8em;
   background-position: bottom;
 }
 /*"salad fork"*/
 .Setting.item_6 {
-  background-image: url('../../../assets/salad_fork.png');
+  background-image: url('../../../assets/images/salad_fork.png');
 }
 /*"fish fork"*/
 .Setting.item_7 {
-  background-image: url('../../../assets/seafood_fork.png');
+  background-image: url('../../../assets/images/seafood_fork.png');
 }
 /*"dinner fork"*/
 .Setting.item_8 {
-  background-image: url('../../../assets/dinner_fork.png');
+  background-image: url('../../../assets/images/dinner_fork.png');
 }
 /*"plate"*/
 .Setting.item_9 {
   width: 10em;
   height: 10em;
-  background-image: url('../../../assets/fancy_plate.png');
+  background-image: url('../../../assets/images/fancy_plate.png');
   background-position: top;
 }
 /*dinner knife*/
 .Setting.item_10 {
-  background-image: url('../../../assets/dinner_knife.png');
+  background-image: url('../../../assets/images/dinner_knife.png');
 }
 /*fish knife*/
 .Setting.item_11 {
-  background-image: url('../../../assets/seafood_knife.png');
+  background-image: url('../../../assets/images/seafood_knife.png');
 }
 /*salad knife*/
 .Setting.item_12 {
-  background-image: url('../../../assets/salad_knife.png');
+  background-image: url('../../../assets/images/salad_knife.png');
 }
 /*soup spoon*/
 .Setting.item_13 {
-  background-image: url('../../../assets/soup_spoon.png');
+  background-image: url('../../../assets/images/soup_spoon.png');
 }
 /*fruit spoon*/
 .Setting.item_14 {
-  background-image: url('../../../assets/fruit_spoon.png');
+  background-image: url('../../../assets/images/fruit_spoon.png');
 }
 /*oyster fork*/
 .Setting.item_15 {
-  background-image: url('../../../assets/oyster_fork.png');
+  background-image: url('../../../assets/images/oyster_fork.png');
 }
 /*salad plate*/
 .Setting.item_16 {
-  background-image: url('../../../assets/salad_plate.png');
+  background-image: url('../../../assets/images/salad_plate.png');
   width: 4rem;
 }
 /*napkin*/
 .Setting.item_17 {
-  background-image: url('../../../assets/napkin.png');
+  background-image: url('../../../assets/images/napkin.png');
 }
 /*dessert spoon/fork*/
 .Setting.item_18 {
-  background-image: url('../../../assets/dessert_spoon.png');
+  background-image: url('../../../assets/images/dessert_spoon.png');
   min-width: 6em;
   background-position: bottom;
 }
 /*Teacup*/
 .Setting.item_19 {
-  background-image: url('../../../assets/tea.png');
+  background-image: url('../../../assets/images/tea.png');
   width: 8em;
   background-position: bottom;
 }

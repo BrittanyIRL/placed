@@ -1,0 +1,18 @@
+.QuizList {
+  width: 50%;
+}
+.QuizList li {
+  list-style-type: none;
+  padding-bottom: .5em;
+}
+.QuizList li a {
+  color: salmon;
+}
+
+.QuizList li a:hover {
+  text-decoration: none;
+  border: none;
+  text-shadow: none;
+  background: none;
+  color: #793932;
+}

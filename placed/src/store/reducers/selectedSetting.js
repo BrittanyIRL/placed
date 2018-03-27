@@ -29,11 +29,22 @@ const getCurrentSettingFail = (state, action ) => {
     error_for : action.error.title
   }
 };
+const getCustomSettingSuccess = (state, action ) => {
+  return {
+    ...state,
+    current_setting_title : action.current_setting.title,
+    current_setting_items : action.current_setting.items,
+    error: false,
+    error_message : null,
+    error_for : null
+  }
+};
 
 const reducer = ( state = initialState, action ) => {
   switch( action.type ) {
     case actionTypes.GET_SELECTED_SETTING_SUCCESS: return getCurrentSettingSuccess(state, action);
     case actionTypes.GET_SELECTED_SETTING_FAIL: return getCurrentSettingFail(state, action);
+    case actionTypes.GET_CUSTOM_SETTING_SUCCESS: return getCustomSettingSuccess(state, action);
     default: return state;
   }
 }

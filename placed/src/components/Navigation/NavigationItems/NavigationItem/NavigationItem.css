@@ -1,9 +1,14 @@
 .NavListItem {
   list-style-type: none;
   min-width: 3em;
+  padding-right: 1em;
 }
 .NavListItem a {
   color: black;
+}
+
+.NavListItem a:hover {
+  color: #793932;
 }
 
 .NavListItem a.active {

@@ -4,19 +4,20 @@ import Button from '../../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
 // images
-import plateImage from '../../../assets/standard_plate.png';
-import takeOutImage from '../../../assets/take_out.png';
-import frisbeeImage from '../../../assets/frisbee.png';
-import soapImage from '../../../assets/soap.png';
+import plateImage from '../../../assets/images/standard_plate.png';
+import takeOutImage from '../../../assets/images/take_out.png';
+import frisbeeImage from '../../../assets/images/frisbee.png';
+import soapImage from '../../../assets/images/soap.png';
 
 // styles
 import styled from 'styled-components'
-import classes from '../SharedQuizzes.css';
+import classes from './FunQuiz.css';
 
 const Main = styled.main`
   width: 90vw;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
 `;
 
 class FunQuiz extends Component {
@@ -52,7 +53,7 @@ class FunQuiz extends Component {
             label : "Do you have enough dishes for everyone?"
           }
         },
-        formIsValid: false
+        formIsValid: true
     }
 
 
@@ -140,6 +141,7 @@ class FunQuiz extends Component {
 
     return (
       <Main>
+        <h2 className={classes.FormHeading}>Proper place settings are for the birds</h2>
         {form}
         {this.state.quizResult}
       </Main>

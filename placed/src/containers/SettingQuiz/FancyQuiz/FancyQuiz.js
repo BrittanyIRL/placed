@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
+// for ajax requests
+import axios from '../../../axios-settings';
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
+
+// Components
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import Settings from '../../../components/Settings/Settings';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
 import styled from 'styled-components'
-import classes from '../SharedQuizzes.css';
+import classes from './FancyQuiz.css';
 
 const Main = styled.main`
   width: 90vw;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
 `;
+
 class FancyQuiz extends Component {
   // Input - Checkboxes : drink options - red wine, white wine, champagne
   // Input - Radio : bread
@@ -18,8 +28,25 @@ class FancyQuiz extends Component {
   // Input - Radio : dessert
   // Input - Radio : serving coffee
   state = {
-      quizResult: (<div className={classes.Results}><p>Set your options to see some results</p></div>),
+      quizResult: (<p>Set your options to see some results</p>),
+      quizExceedsCourses : false,
       quizItems: {
+        settingTitle: {
+          elementType: 'input',
+          elementConfig: {
+              type: 'text',
+              placeholder: 'dinner party'
+          },
+          value: '',
+          validation: {
+              required: true,
+              minLength: 3,
+              maxLength: 20,
+          },
+          valid: false,
+          touched: false,
+          label : "Give your setting a name"
+        },
         courses: {
             elementType: 'input',
             elementConfig: {
@@ -28,7 +55,8 @@ class FancyQuiz extends Component {
             },
             value: '',
             validation: {
-                required: true
+                required: true,
+                isNumeric: true
             },
             valid: false,
             touched: false,
@@ -89,15 +117,21 @@ class FancyQuiz extends Component {
             name: 'coffee',
             value: "false",
             validation: {},
-            valid: false,
+            valid: true,
             label : "Are you serving coffee or tea?"
           }
         },
         formIsValid: false
       }
-
+      componentDidMount(){
+        // get setting legend
+        this.props.fetchSettingLegend();
+        this.props.fetchSettingOrder();
+        this.props.fetchSettingTypes();
+      }
       updateResults = ( event ) => {
         event.preventDefault();
+        let name = this.state.quizItems.settingTitle.value;
         let courses = this.state.quizItems.courses.value;
         let is_bread = this.state.quizItems.bread.value !== "false";
         let is_dessert = this.state.quizItems.dessert.value !== "false";
@@ -105,18 +139,19 @@ class FancyQuiz extends Component {
 
         console.log(courses);
         let setting_options = [];
-        let setting_type = null;
+        let remove_options = [];
+        let setting_type = "basic";
         let setting_max = Number(courses) > 4 ? true : false; // true if courses > 4
         let setting_error = false; // throw an error if there's no way to show setting
-        let two_courses = ['6', '12'];
-        let three_courses = ['7', '11'];
-        let four_courses = ['13'];
-        let dessert = ['18'];
-        let coffee = ['19'];
-        let bread = ['1'];
+        let two_courses = [6, 12];
+        let three_courses = [7, 11];
+        let four_courses = [13];
+        let dessert = [18];
+        let coffee = [19];
+        let bread = [1];
 
         if(Number(courses) === 1) {
-          setting_type = "basic";
+          //setting_type = "basic"; // for if we want another setting type to update, but currently basic is also default
         } else if(Number(courses) === 2) {
           setting_options = setting_options.concat(two_courses);
         } else if(Number(courses) === 3) {
@@ -127,33 +162,24 @@ class FancyQuiz extends Component {
         } else {
           setting_error = true;
         }
-
         if(is_bread){
           setting_options = setting_options.concat(bread);
+        } else {
+          remove_options = remove_options.concat(bread);
         }
         if(is_dessert){
           setting_options = setting_options.concat(dessert);
+        } else {
+          remove_options = remove_options.concat(dessert);
         }
         if(is_coffee){
           setting_options = setting_options.concat(coffee);
+        } else {
+          remove_options = remove_options.concat(coffee);
         }
 
-        console.log("setting options: ", setting_options);
-
-
-        // pass updated state to redux to decide what to render
-        // if courses > 4 flag state
-        // if courses === 0 show original state
-        // if courses === 1 show basic setting
-        // if courses > 1 go through the following:
-          // if bread_true option : 1
-          // if dessert true option : 18
-          // if coffee true option: 19
-          // if courses 2 : + options : 6, 12
-          // if courses 3 : + options 7, 11
-          // if courses 4 and NOT dessert : options 13
-          // if courses 4 and IS dessert : no further options
-
+        this.props.fetchCustomSetting(setting_type, setting_options, remove_options, name)
+        this.setState({quizExceedsCourses : setting_max});
       }
       // todo
       updateCheckbox = (newValue, inputIdentifier) => {
@@ -220,31 +246,77 @@ class FancyQuiz extends Component {
               });
           }
           let form = (
-              <form onSubmit={this.updateResults} className={classes.Quiz}>
-                  {formElementsArray.map(formElement => (
-                    <div key={formElement.id}>
-                      <label>{formElement.config.label}</label>
-                      <Input
-                          elementType={formElement.config.elementType}
-                          elementConfig={formElement.config.elementConfig}
-                          value={formElement.config.value}
-                          invalid={!formElement.config.valid}
-                          shouldValidate={formElement.config.validation}
-                          touched={formElement.config.touched}
-                          changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                    </div>
-                  ))}
-                  <Button btnType="BasicBackground" has_background="true" disabled={!this.state.formIsValid}>Enter</Button>
-              </form>
+            <form onSubmit={this.updateResults} className={classes.Quiz}>
+              {formElementsArray.map(formElement => (
+                <div key={formElement.id}>
+                  <label>{formElement.config.label}</label>
+                  <Input
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                </div>
+              ))}
+              <div>
+              <Button btnType="BasicBackground" has_background="true" disabled={!this.state.formIsValid}>Enter</Button>
+              </div>
+            </form>
           );
+
+        let current_setting = this.state.quizResult;
+        if (this.props.current_error) {
+          current_setting = (<p>this.props.current_error_message + this.props.current_error_title</p>);
+        } else {
+          if (this.props.current_setting_title) {
+            current_setting = (
+              <Settings
+                items={this.props.current_setting_items}
+                legend={this.props.setting_legend}
+                order={this.props.setting_order}
+                title={this.props.current_setting_title}
+                />
+            )
+          }
+        }
 
         return (
           <Main>
+            <h2>Get some help building a place setting</h2>
             {form}
-            {this.state.quizResult}
+            <div className={classes.Results}>{current_setting}
+            {this.state.quizExceedsCourses ? "Anything after the first 4 settings doesn't get a place setting at the start of the meal." : null}
+            </div>
           </Main>
         )
       }
 }
 
-export default FancyQuiz;
+const mapStateToProps = state => {
+  return {
+    setting_legend : state.tableSetting.setting_legend,
+    setting_order : state.tableSetting.setting_order,
+    setting_types : state.tableSetting.setting_types,
+    current_setting_items : state.selectedSetting.current_setting_items,
+    current_setting_title : state.selectedSetting.current_setting_title,
+    settings_error : state.tableSetting.error,
+    settings_error_message : state.tableSetting.error_message,
+    settings_error_title : state.tableSetting.error_for,
+    current_error : state.selectedSetting.error,
+    current_error_message : state.selectedSetting.error_message,
+    current_error_title : state.selectedSetting.error_for
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchSettingLegend: () => dispatch(actions.fetchSettingLegend()),
+    fetchSettingOrder: () => dispatch(actions.fetchSettingOrder()),
+    fetchSettingTypes: () => dispatch(actions.fetchSettingTypes()),
+    fetchCustomSetting: (setting, add_items, remove_items, name) => dispatch(actions.fetchCustomSetting(setting, add_items, remove_items, name))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FancyQuiz);
