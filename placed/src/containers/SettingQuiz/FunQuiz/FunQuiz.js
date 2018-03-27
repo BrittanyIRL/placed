@@ -11,7 +11,7 @@ import soapImage from '../../../assets/soap.png';
 
 // styles
 import styled from 'styled-components'
-import classes from './FunQuiz.css';
+import classes from '../SharedQuizzes.css';
 
 const Main = styled.main`
   width: 90vw;
@@ -90,25 +90,27 @@ class FunQuiz extends Component {
     }
     this.setState({ quizResult : display_result });
   }
+
   inputChangedHandler = (event, inputIdentifier) => {
     console.log("input change! ", event, inputIdentifier);
-      const updatedFormElement = updateObject(this.state.quizItems[inputIdentifier], {
-        value : event.target.value,
-        valid : checkValidity(event.target.value, this.state.quizItems[inputIdentifier].validation),
-        touched : true
-      });
-      console.log("updated form: ", updatedFormElement);
+    const updatedFormElement = updateObject(this.state.quizItems[inputIdentifier], {
+      value : event.target.value,
+      valid : checkValidity(event.target.value, this.state.quizItems[inputIdentifier].validation),
+      touched : true
+    });
+    console.log("updated form: ", updatedFormElement);
 
-      const updateQuizResults = updateObject(this.state.quizItems, {
-        [inputIdentifier] : updatedFormElement
-      });
+    const updateQuizResults = updateObject(this.state.quizItems, {
+      [inputIdentifier] : updatedFormElement
+    });
 
-      let formIsValid = true;
-      for (let inputIdentifier in updateQuizResults) {
-          formIsValid = updateQuizResults[inputIdentifier].valid && formIsValid;
-      }
-      this.setState({quizItems: updateQuizResults, formIsValid: formIsValid});
+    let formIsValid = true;
+    for (let inputIdentifier in updateQuizResults) {
+        formIsValid = updateQuizResults[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({quizItems: updateQuizResults, formIsValid: formIsValid});
   }
+
   render() {
     const formElementsArray = [];
       for (let key in this.state.quizItems) {

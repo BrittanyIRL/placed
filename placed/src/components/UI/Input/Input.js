@@ -12,6 +12,9 @@ const input = ( props ) => {
     if (props.elementType === 'radio') {
       inputClasses.push(classes.Radio)
     }
+    if (props.elementType === 'checkbox') {
+      inputClasses.push(classes.Checkbox)
+    }
 
     switch ( props.elementType ) {
         case ( 'input' ):
@@ -35,6 +38,24 @@ const input = ( props ) => {
                 checked={props.value === option.value}
                 />
                 <label className={classes.RadioLabel}>{option.displayValue}</label>
+                </span>
+            ))} </span>
+          )
+          break;
+        case ( 'checkbox' ):
+          inputElement = (<span>
+            {props.elementConfig.options.map(option => (
+              <span key={option.id}>
+              <input
+                value={option.value}
+                id={option.id}
+                type='checkbox'
+                name={props.name}
+                className={inputClasses.join(' ')}
+                onChange={props.changed}
+                checked={option.checked}
+                />
+                <label className={classes.CheckboxLabel}>{option.displayValue}</label>
                 </span>
             ))} </span>
           )
