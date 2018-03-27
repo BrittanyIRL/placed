@@ -17,9 +17,9 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path = "/quiz" component={SettingQuiz} />
         <Route path = "/quizzes/fancy" component={FancyQuiz} />
         <Route path = "/quizzes/fun" component={FunQuiz} />
+        <Route path = "/quizzes" component={SettingQuiz} />
         <Route path = "/" component={PlaceSettings} />
         <Redirect to="/" />
       </Switch>
