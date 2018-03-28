@@ -21,7 +21,7 @@ const Main = styled.main`
 `;
 
 
-class PlaceSettings extends Component {
+export class PlaceSettings extends Component {
   componentDidMount(){
     // get setting legend
     this.props.fetchSettingLegend();
