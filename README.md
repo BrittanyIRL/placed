@@ -1,4 +1,4 @@
-#Placed
+# Placed
 This was honestly just a good learning mechanism for the different parts of React without overly complicating the concept. My mother in law asks me to set the table sometimes when we go over to their home for dinner, every single time I do it wrong so I thought this would be silly and also educational on every level. Table placement etiquette mostly makes me roll my eyes, I have better things to worry about, but looked at as a developer - it's way more interesting! Each item in a place setting has an ordering and an affiliation, so it was a great way to link components and create a redux store that can be reused. So that's what this is.
 
 ## Uses
@@ -22,7 +22,7 @@ The two quizzes also allow me to use some form elements and validation.
   - These are all reference arrays or objects that allow us to sort and show the proper order and items a user selects
 - Client State:
   - Fun Quiz
-    
+
 ## Todo
 - More tests!
 - Totally skipped over documenting code on this, that's my bad completely, was just excited to be working on it. Need to go back and fix that.
